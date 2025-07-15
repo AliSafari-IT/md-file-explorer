@@ -1,6 +1,6 @@
 {
   "name": "@asafarim/md-file-explorer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A TypeScript package for recursively exploring markdown files and folders with lazy loading capabilities",
   "type": "module",
   "main": "dist/index.js",
@@ -53,5 +53,14 @@
     "type": "git",
     "url": "https://github.com/AliSafari-IT/md-file-explorer.git"
   },
-  "homepage": "https://github.com/AliSafari-IT/md-file-explorer#readme"
+  "homepage": "https://github.com/AliSafari-IT/md-file-explorer#readme",
+  "bugs": {
+    "url": "https://github.com/AliSafari-IT/md-file-explorer/issues"
+  },
+  "funding": {
+    "url": "https://github.com/sponsors/AliSafari-IT"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
