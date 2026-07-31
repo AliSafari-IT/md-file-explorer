@@ -13,10 +13,10 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "dev": "npx kill-port 3106 && pnpm run clean && pnpm install && pnpm run build && cd demo && pnpm run dev",
+    "dev": "npx kill-port 3106 && pnpm run clean && pnpm run build && cd demo && pnpm run dev",
     "all": "pnpm install && pnpm run build",
     "prepare": "npm run build",
-    "clean": "rimraf dist node_modules/.vite node_modules/.cache node_modules/.pnpm node_modules/.turbo node_modules/.eslintcache",
+    "clean": "rimraf dist",
     "demo": "pnpm build && cd demo && pnpm run build && pnpm dev",
     "prepublishOnly": "npm run clean && npm run build",
     "test": "jest"
