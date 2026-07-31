@@ -5,6 +5,8 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // Use /md-file-explorer/ base for GitHub Pages, / for local dev
+  base: process.env.GITHUB_ACTIONS ? '/md-file-explorer/' : '/',
   server: {
     port: 3106,
     open: true
