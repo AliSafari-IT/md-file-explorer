@@ -1,12 +1,12 @@
 {
     "name": "@asafarim/md-file-explorer-demo",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "private": true,
     "description": "Professional showcase demo for @asafarim/md-file-explorer",
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "predev": "npx kill-port 3006",
+        "predev": "npx kill-port 3106",
         "build": "tsc && vite build",
         "lint": "eslint .",
         "all": "pnpm i && pnpm run build",
@@ -19,13 +19,14 @@
         "react-dom": "^18.2.0",
         "lucide-react": "^0.298.0",
         "highlight.js": "^11.9.0",
-        "marked": "^11.1.1"
+        "marked": "^11.1.1",
+        "kill-port": "^2.0.1"
     },
     "devDependencies": {
         "@types/react": "^18.2.43",
         "@types/react-dom": "^18.2.17",
         "@vitejs/plugin-react": "^4.2.1",
-        "typescript": "^5.2.2",
+        "typescript": "^5.9.0",
         "vite": "^5.0.8"
     }
 }
