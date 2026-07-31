@@ -1,4 +1,5 @@
 import React from 'react'
+import { version } from '../../../package.json'
 import styles from './Header.module.css'
 
 const Header: React.FC = () => {
@@ -7,7 +8,7 @@ const Header: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.brand}>
           <h1>@asafarim/md-file-explorer</h1>
-          <span className={styles.version}>v1.0.0</span>
+          <span className={styles.version}>v{version}</span>
         </div>
         <div className={styles.description}>
           Professional markdown file exploration with TypeScript, lazy loading, and real-time file watching

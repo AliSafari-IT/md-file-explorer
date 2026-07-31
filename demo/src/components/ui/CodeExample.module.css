@@ -84,3 +84,38 @@
   /* Functions */
   --color-function: #6f42c1;
 }
+
+@media (max-width: 768px) {
+  .code {
+    padding: 14px;
+    font-size: 13px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: hidden;
+  }
+
+  .header {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .code {
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .header {
+    padding: 8px 10px;
+  }
+
+  .language {
+    font-size: 0.75rem;
+  }
+
+  .copyButton {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+}

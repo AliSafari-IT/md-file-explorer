@@ -6,7 +6,7 @@
   background: #fafafa;
 }
 
-.container {
+.body {
   flex: 1;
   display: flex;
   overflow: hidden;
@@ -43,14 +43,110 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Sticky mobile top bar - hidden on desktop, holds the hamburger toggle
+   in normal document flow so it never drifts over scrolled content */
+.mobileTopBar {
+  display: none;
+}
+
+.mobileTopBarTitle {
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hamburger toggle button - hidden on desktop */
+.navToggle {
+  display: none;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 9px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.navToggle span {
+  display: block;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.navToggleOpen span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navToggleOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.navToggleOpen span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Overlay for mobile nav - always rendered, toggled via class */
+.overlay {
+  display: none;
+}
+
+.overlayVisible {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @media (max-width: 768px) {
-  .container {
+  .body {
     flex-direction: column;
+    overflow: visible;
   }
-  
+
   .main {
     margin-left: 0;
-    margin-top: 16px;
+    margin-top: 0;
     border-radius: 12px 12px 0 0;
+    padding: 16px;
+    flex: 1;
+  }
+
+  .mobileTopBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .navToggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 12px;
   }
 }

@@ -66,7 +66,7 @@ const FileTreeItem: React.FC<FileTreeItemProps> = ({ node, level, onFileSelect }
     <div className={styles.item}>
       <div 
         className={`${styles.header} ${node.type === 'file' ? styles.file : styles.folder}`}
-        style={{ paddingLeft: `${level * 20}px` }}
+        style={{ paddingLeft: `calc(${level} * var(--tree-indent, 20px))` }}
         onClick={node.type === 'folder' ? handleToggle : handleFileClick}
       >
         <span className={styles.icon}>{getIcon()}</span>
@@ -98,7 +98,7 @@ const FileTreeItem: React.FC<FileTreeItemProps> = ({ node, level, onFileSelect }
       )}
       
       {node.metadata && node.type === 'file' && (
-        <div className={styles.metadataDetails} style={{ paddingLeft: `${(level + 1) * 20}px` }}>
+        <div className={styles.metadataDetails} style={{ paddingLeft: `calc(${(level + 1)} * var(--tree-indent, 20px))` }}>
           {node.metadata.title && (
             <div className={styles.metadataItem}>
               <strong>Title:</strong> {node.metadata.title}

@@ -289,18 +289,80 @@
   .header h1 {
     font-size: 2rem;
   }
-  
+
   .controls {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .sortControls {
     flex-direction: column;
   }
-  
+
   .content {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .demo {
+    max-width: 100%;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header p {
+    font-size: 0.875rem;
+  }
+
+  .controls {
+    padding: 14px;
+    gap: 16px;
+  }
+
+  .filterSection h3 {
+    font-size: 0.875rem;
+  }
+
+  .checkbox {
+    font-size: 0.8125rem;
+  }
+
+  .section {
+    padding: 14px;
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+
+  .fileDetails {
+    padding: 14px;
+  }
+
+  .fileDetails h3 {
+    font-size: 1rem;
+  }
+
+  .codeSection {
+    padding: 14px;
+  }
+
+  .codeSection h2 {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+
+  .tag {
+    font-size: 0.6875rem;
+    padding: 2px 6px;
   }
 }

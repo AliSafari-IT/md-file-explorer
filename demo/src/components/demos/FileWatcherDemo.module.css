@@ -280,26 +280,99 @@
   .header h1 {
     font-size: 2rem;
   }
-  
+
   .stats {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-  
+
   .stat {
     padding: 16px;
   }
-  
+
   .statValue {
     font-size: 1.5rem;
   }
-  
+
   .content {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
+
   .buttonGroup {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .demo {
+    max-width: 100%;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header p {
+    font-size: 0.875rem;
+  }
+
+  .controls {
+    padding: 12px;
+  }
+
+  .button {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .stat {
+    padding: 12px;
+  }
+
+  .statValue {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: 14px;
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+
+  .eventFeed {
+    max-height: 300px;
+    padding: 8px;
+  }
+
+  .event {
+    padding: 8px;
+  }
+
+  .eventPath {
+    font-size: 0.75rem;
+    word-break: break-all;
+  }
+
+  .instructions {
+    padding: 14px;
+    margin-top: 16px;
+  }
+
+  .instructions h3 {
+    font-size: 1rem;
   }
 }

@@ -134,3 +134,86 @@
 .tree::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+@media (max-width: 768px) {
+  .tree {
+    font-size: 13px;
+    padding: 12px;
+    max-height: 50vh;
+    --tree-indent: 16px;
+  }
+
+  .header {
+    padding: 6px 6px;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+
+  .name {
+    white-space: normal;
+    word-break: break-all;
+    overflow: visible;
+    text-overflow: clip;
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+
+  .metadata {
+    gap: 6px;
+    font-size: 11px;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  .toggle {
+    font-size: 11px;
+  }
+
+  .metadataDetails {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tree {
+    font-size: 12px;
+    padding: 8px;
+    max-height: 45vh;
+    --tree-indent: 12px;
+  }
+
+  .icon {
+    font-size: 14px;
+  }
+
+  .header {
+    padding: 5px 4px;
+    gap: 4px 6px;
+  }
+
+  .metadata {
+    gap: 4px;
+    font-size: 10px;
+  }
+
+  .size,
+  .date {
+    padding: 1px 4px;
+    font-size: 10px;
+  }
+
+  .metadataDetails {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+
+  .metadataItem strong {
+    margin-right: 4px;
+  }
+
+  .empty {
+    padding: 24px 12px;
+    font-size: 12px;
+  }
+}

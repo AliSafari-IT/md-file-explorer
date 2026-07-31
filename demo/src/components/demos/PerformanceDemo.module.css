@@ -261,37 +261,179 @@
   .header h1 {
     font-size: 2rem;
   }
-  
+
   .controls {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
   }
-  
+
   .stats {
     flex-direction: column;
   }
-  
+
   .content {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  
-  .tableHeader,
+
+  /* Convert table to card layout on mobile */
+  .resultsTable {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .tableHeader {
+    display: none;
+  }
+
   .tableRow {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: none;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: #fafafa;
   }
-  
-  .tableHeader > div,
+
+  .tableRow:hover {
+    background: #f0f4ff;
+  }
+
   .tableRow > div {
+    width: 50%;
+    padding: 6px 8px;
     border-right: none;
-    border-bottom: 1px solid #dee2e6;
-    text-align: left;
+    border-bottom: none;
+    font-size: 0.8125rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
-  
-  .tableHeader > div:last-child,
+
+  .tableRow > div::before {
+    content: attr(data-label);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
   .tableRow > div:last-child {
     border-bottom: none;
+  }
+
+  /* Operation takes full width as the card title */
+  .tableRow > .operation {
+    width: 100%;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .tableRow > .operation::before {
+    font-size: 0.6875rem;
+    color: #6c757d;
+  }
+
+  .tableRow > .throughput {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .demo {
+    max-width: 100%;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header p {
+    font-size: 0.875rem;
+  }
+
+  .controls {
+    padding: 12px;
+  }
+
+  .benchmarkButton {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+  }
+
+  .stats {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .stat {
+    padding: 12px;
+  }
+
+  .statValue {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: 14px;
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+
+  /* Tighter card spacing on phones */
+  .tableRow {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .tableRow > div {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+
+  .tableRow > .operation {
+    font-size: 0.875rem;
+  }
+
+  .tip {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .tipIcon {
+    font-size: 18px;
+  }
+
+  .tip h4 {
+    font-size: 0.875rem;
+  }
+
+  .tip p {
+    font-size: 0.8125rem;
+  }
+
+  .codeSection {
+    padding: 14px;
+  }
+
+  .codeSection h2 {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
   }
 }

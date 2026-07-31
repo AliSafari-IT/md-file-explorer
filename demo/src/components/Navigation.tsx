@@ -5,6 +5,7 @@ import styles from './Navigation.module.css'
 interface NavigationProps {
   activeDemo: DemoType
   onDemoChange: (demo: DemoType) => void
+  dataNavOpen?: boolean
 }
 
 const demoItems = [
@@ -40,9 +41,9 @@ const demoItems = [
   }
 ]
 
-const Navigation: React.FC<NavigationProps> = ({ activeDemo, onDemoChange }) => {
+const Navigation: React.FC<NavigationProps> = ({ activeDemo, onDemoChange, dataNavOpen }) => {
   return (
-    <nav className={styles.navigation}>
+    <nav className={styles.navigation} data-nav-open={dataNavOpen || undefined}>
       <div className={styles.header}>
         <h2>Demos</h2>
         <p>Explore different capabilities</p>

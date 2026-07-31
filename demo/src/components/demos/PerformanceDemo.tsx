@@ -255,12 +255,12 @@ const expandFolder = async (path: string) => {
               </div>
               {benchmarks.map((result, index) => (
                 <div key={index} className={styles.tableRow}>
-                  <div className={styles.operation}>{result.operation}</div>
-                  <div className={styles.duration}>
+                  <div className={styles.operation} data-label="Operation">{result.operation}</div>
+                  <div className={styles.duration} data-label="Duration">
                     {result.duration.toFixed(1)}ms
                   </div>
-                  <div className={styles.items}>{result.itemsProcessed}</div>
-                  <div className={styles.throughput}>
+                  <div className={styles.items} data-label="Items">{result.itemsProcessed}</div>
+                  <div className={styles.throughput} data-label="Throughput">
                     {result.throughput > 0 ? `${result.throughput.toFixed(1)}/s` : '-'}
                   </div>
                 </div>
