@@ -1,6 +1,6 @@
 {
   "name": "@asafarim/md-file-explorer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A TypeScript package for recursively exploring markdown files and folders with lazy loading capabilities",
   "type": "module",
   "main": "dist/index.js",
@@ -13,10 +13,10 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "dev": "npx kill-port 3106 && pnpm run clean && pnpm run build && cd demo && pnpm run dev",
-    "all": "pnpm i && pnpm run build",
+    "dev": "npx kill-port 3106 && pnpm run clean && pnpm install && pnpm run build && cd demo && pnpm run dev",
+    "all": "pnpm install && pnpm run build",
     "prepare": "npm run build",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist node_modules/.vite node_modules/.cache node_modules/.pnpm node_modules/.turbo node_modules/.eslintcache",
     "demo": "pnpm build && cd demo && pnpm run build && pnpm dev",
     "prepublishOnly": "npm run clean && npm run build",
     "test": "jest"
