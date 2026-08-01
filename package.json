@@ -20,7 +20,6 @@
     "demo": "pnpm build && cd demo && pnpm run build && pnpm dev",
     "deploy:pages": "pnpm run build && cd demo && pnpm run build",
     "prepublishOnly": "npm run clean && npm run build",
-    "publish": "pnpm publish --access public && git push --follow-tags",
     "test": "jest"
   },
   "keywords": [

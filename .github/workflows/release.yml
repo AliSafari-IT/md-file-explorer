@@ -1,0 +1,96 @@
+name: Auto Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build library
+        run: pnpm run clean && pnpm run build
+
+      - name: Determine version bump
+        id: bump
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$PREV_TAG" ]; then
+            echo "No previous tag found, bumping patch"
+            echo "type=patch" >> $GITHUB_OUTPUT
+          else
+            COMMITS=$(git log ${PREV_TAG}..HEAD --pretty=format:"%s")
+            echo "Commits since last tag:"
+            echo "$COMMITS"
+
+            if echo "$COMMITS" | grep -qiE "^(feat|feature)(\(.+\))?!:"; then
+              echo "Breaking change in feat detected → major"
+              echo "type=major" >> $GITHUB_OUTPUT
+            elif echo "$COMMITS" | grep -qiE "^BREAKING CHANGE"; then
+              echo "Breaking change detected → major"
+              echo "type=major" >> $GITHUB_OUTPUT
+            elif echo "$COMMITS" | grep -qiE "^(feat|feature)(\(.+\))?:"; then
+              echo "Feature commit detected → minor"
+              echo "type=minor" >> $GITHUB_OUTPUT
+            elif echo "$COMMITS" | grep -qiE "^(fix|patch|chore|refactor|perf|docs)(\(.+\))?!:"; then
+              echo "Breaking change in fix detected → major"
+              echo "type=major" >> $GITHUB_OUTPUT
+            else
+              echo "Default → patch"
+              echo "type=patch" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Bump version
+        id: version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ steps.bump.outputs.type }} -m "chore(release): v%s [skip ci]"
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION"
+
+      - name: Publish to npm
+        run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push version bump + tags
+        run: git push --follow-tags
+
+      - name: Build demo for GitHub Pages
+        run: cd demo && rm -rf dist && pnpm run build
+
+      - name: Summary
+        run: |
+          echo "### Released v${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Published to npm: https://www.npmjs.com/package/@asafarim/md-file-explorer" >> $GITHUB_STEP_SUMMARY
