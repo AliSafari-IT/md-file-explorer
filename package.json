@@ -1,6 +1,6 @@
 {
   "name": "@asafarim/md-file-explorer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A TypeScript package for recursively exploring markdown files and folders with lazy loading capabilities",
   "type": "module",
   "main": "dist/index.js",

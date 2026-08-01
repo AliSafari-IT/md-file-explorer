@@ -1,6 +1,6 @@
 {
     "name": "@asafarim/md-file-explorer-demo",
-    "version": "1.1.0",
+    "version": "1.1.2",
     "private": true,
     "description": "Professional showcase demo for @asafarim/md-file-explorer",
     "type": "module",

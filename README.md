@@ -1,54 +1,73 @@
+<div align="center">
+
+<img src="demo/public/logo.svg" alt="MD File Explorer" width="120" height="120" />
+
 # @asafarim/md-file-explorer
 
-A TypeScript package for recursively exploring markdown files and folders with lazy loading capabilities.
+**A TypeScript library for recursively exploring markdown files and folders with lazy loading, file watching, and metadata parsing.**
 
-## Features
+[![npm version](https://img.shields.io/npm/v/@asafarim/md-file-explorer.svg)](https://www.npmjs.com/package/@asafarim/md-file-explorer)
+[![npm downloads](https://img.shields.io/npm/dm/@asafarim/md-file-explorer.svg)](https://www.npmjs.com/package/@asafarim/md-file-explorer)
+[![license](https://img.shields.io/npm/l/@asafarim/md-file-explorer.svg)](https://github.com/AliSafari-IT/md-file-explorer/blob/main/LICENSE)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://alisafari-it.github.io/md-file-explorer)
 
-- 🚀 **Lazy Loading**: Scan directories on-demand, not all at once
-- 📁 **Recursive Scanning**: Automatically discovers nested folders and markdown files
-- 🔍 **Smart Filtering**: Include/exclude files based on extensions and patterns
-- 📝 **Metadata Parsing**: Extracts frontmatter from markdown files
-- 👀 **File Watching**: Real-time updates when files change
-- 🎯 **TypeScript**: Fully typed with comprehensive interfaces
-- ⚡ **Performance**: Only loads content when needed
+[Live Demo](https://alisafari-it.github.io/md-file-explorer) · [Documentation](https://github.com/AliSafari-IT/md-file-explorer) · [Report Bug](https://github.com/AliSafari-IT/md-file-explorer/issues) · [Request Feature](https://github.com/AliSafari-IT/md-file-explorer/issues)
 
-## Installation
+</div>
+
+---
+
+## ✨ Features
+
+- **🚀 Lazy Loading** — Scan directories on-demand instead of loading everything upfront
+- **📁 Recursive Scanning** — Automatically discovers nested folders and markdown files
+- **🔍 Smart Filtering** — Include or exclude files based on extensions and glob patterns
+- **📝 Metadata Parsing** — Extracts YAML frontmatter from markdown files automatically
+- **👀 File Watching** — Get real-time notifications when files are added, changed, or removed
+- **🔎 Full-Text Search** — Search by filename or file content across your entire tree
+- **🎯 Fully Typed** — Written in TypeScript with comprehensive type definitions
+- **⚡ High Performance** — Only loads content when needed, with configurable depth limits
+
+## 📦 Installation
 
 ```bash
+# npm
 npm install @asafarim/md-file-explorer
-# or
+
+# yarn
 yarn add @asafarim/md-file-explorer
-# or
+
+# pnpm
 pnpm add @asafarim/md-file-explorer
 ```
 
-## Basic Usage
+## 🚀 Quick Start
 
 ```typescript
 import { MdFileExplorer } from '@asafarim/md-file-explorer';
 
-// Create explorer instance
+// Create an explorer instance
 const explorer = new MdFileExplorer('/path/to/docs', {
   includeExtensions: ['.md', '.mdx'],
   excludePatterns: ['node_modules', '.git'],
-  parseMarkdownMetadata: true
+  parseMarkdownMetadata: true,
 });
 
-// Get file tree (lazy loading)
+// Get the file tree (lazy-loaded by default)
 const fileTree = await explorer.getFileTree();
 
-// Get specific file content
-const content = await explorer.getFileContent('folder/file.md');
+// Read a specific file's content
+const content = await explorer.getFileContent('guides/getting-started.md');
 
-// Scan entire directory
+// Scan an entire directory at once
 const scanResult = await explorer.scanDirectory();
 ```
 
-## API Reference
+## 📖 API Reference
 
-### MdFileExplorer
+### `MdFileExplorer`
 
-Main class for exploring markdown files.
+The main class for exploring markdown files.
 
 #### Constructor
 
@@ -56,94 +75,155 @@ Main class for exploring markdown files.
 new MdFileExplorer(rootPath: string, options?: ExplorerOptions)
 ```
 
+| Parameter   | Type              | Description                          |
+| ----------- | ----------------- | ------------------------------------ |
+| `rootPath`  | `string`          | Root directory to explore            |
+| `options`   | `ExplorerOptions` | Optional configuration (see below)   |
+
 #### Methods
 
-- `scanDirectory(path?, options?)` - Scan directory and return complete tree
-- `getFileTree(path?, depth?)` - Get file tree with optional depth limit (lazy)
-- `getFileContent(filePath)` - Get content of specific file
-- `watchDirectory(callback)` - Watch for file changes
-- `stopWatching()` - Stop watching for changes
-- `searchFiles(query, searchInContent?)` - Search for files
-- `fileExists(filePath)` - Check if file exists
+| Method                              | Returns                  | Description                                  |
+| ----------------------------------- | ------------------------ | -------------------------------------------- |
+| `scanDirectory(path?, options?)`    | `Promise<ScanResult>`    | Scan a directory and return the complete tree |
+| `getFileTree(path?, depth?)`        | `Promise<FileNode[]>`    | Get the file tree with an optional depth limit |
+| `getFileContent(filePath)`          | `Promise<FileContent>`   | Get the content of a specific file           |
+| `watchDirectory(callback)`          | `void`                   | Watch for file system changes in real-time   |
+| `stopWatching()`                    | `void`                   | Stop watching for file changes               |
+| `searchFiles(query, searchInContent?)` | `Promise<FileNode[]>` | Search for files by name or content          |
+| `fileExists(filePath)`              | `Promise<boolean>`       | Check if a file exists in the tree           |
 
 ### Types
 
-#### FileNode
+#### `FileNode`
+
 ```typescript
 interface FileNode {
-  name: string;           // File or folder name
-  path: string;           // Relative path from root
-  type: 'folder' | 'file'; // Node type
-  children?: FileNode[];   // Child nodes (folders only)
-  lastModified?: Date;     // Last modification date
-  size?: number;           // File size in bytes
-  metadata?: MarkdownMetadata; // Parsed frontmatter
+  name: string;                        // File or folder name
+  path: string;                        // Relative path from root
+  type: 'folder' | 'file';             // Node type
+  children?: FileNode[];               // Child nodes (folders only)
+  lastModified?: Date;                 // Last modification date
+  size?: number;                       // File size in bytes
+  metadata?: MarkdownMetadata;         // Parsed frontmatter (if enabled)
 }
 ```
 
-#### ExplorerOptions
+#### `ExplorerOptions`
+
 ```typescript
 interface ExplorerOptions {
   rootPath: string;                    // Root directory path
-  includeExtensions?: string[];        // File extensions to include
-  excludePatterns?: string[];          // Patterns to exclude
-  maxDepth?: number;                   // Maximum scan depth
-  sortBy?: 'name' | 'date' | 'size';  // Sort criteria
-  sortOrder?: 'asc' | 'desc';         // Sort order
-  includeDotFiles?: boolean;           // Include hidden files
-  parseMarkdownMetadata?: boolean;     // Parse frontmatter
+  includeExtensions?: string[];        // e.g. ['.md', '.mdx']
+  excludePatterns?: string[];          // e.g. ['node_modules', '.git']
+  maxDepth?: number;                   // Maximum scan depth (default: unlimited)
+  sortBy?: 'name' | 'date' | 'size';   // Sort criteria (default: 'name')
+  sortOrder?: 'asc' | 'desc';          // Sort direction (default: 'asc')
+  includeDotFiles?: boolean;           // Include hidden files (default: false)
+  parseMarkdownMetadata?: boolean;     // Parse YAML frontmatter (default: false)
 }
 ```
 
-## Examples
+#### `MarkdownMetadata`
 
-### Lazy Loading File Tree
+```typescript
+interface MarkdownMetadata {
+  title?: string;
+  description?: string;
+  tags?: string[];
+  [key: string]: unknown;              // Any additional frontmatter fields
+}
+```
+
+#### `ScanResult`
+
+```typescript
+interface ScanResult {
+  rootPath: string;
+  nodes: FileNode[];
+  totalFiles: number;
+  totalFolders: number;
+  totalSize: number;
+}
+```
+
+### Utilities
+
+The package also exports these helper functions:
+
+```typescript
+import {
+  normalizePath,
+  isValidMarkdownFile,
+  shouldExcludePath,
+  getFileStats,
+  parseMarkdownMetadata,
+  sortFileNodes,
+  createFileNode,
+  getRelativePath,
+} from '@asafarim/md-file-explorer';
+```
+
+## 💡 Examples
+
+### Lazy Loading with Depth Control
+
+Only load what you need — great for large documentation trees:
 
 ```typescript
 const explorer = new MdFileExplorer('/docs');
 
-// Get top-level folders and files only
+// Get only top-level folders and files
 const topLevel = await explorer.getFileTree('/', 1);
 
-// Load specific folder contents
+// Load contents of a specific folder (2 levels deep)
 const packageDocs = await explorer.getFileTree('/packages', 2);
 ```
 
-### File Watching
+### Real-Time File Watching
+
+React to file changes as they happen:
 
 ```typescript
 explorer.watchDirectory((event, path) => {
   console.log(`File ${event}: ${path}`);
-  // Handle file changes (add, change, unlink, etc.)
+  // Events: 'add' | 'change' | 'unlink' | 'addDir' | 'unlinkDir'
 });
+
+// Stop watching when done
+explorer.stopWatching();
 ```
 
-### Search Files
+### Searching Files
+
+Find files by name or search their content:
 
 ```typescript
 // Search by filename
-const results = await explorer.searchFiles('react');
+const byName = await explorer.searchFiles('react');
 
-// Search in content (if implemented)
-const contentResults = await explorer.searchFiles('component', true);
+// Search inside file contents too
+const byContent = await explorer.searchFiles('useState', true);
 ```
 
-### Custom Options
+### Custom Configuration
+
+Fine-tune the explorer for your project:
 
 ```typescript
 const explorer = new MdFileExplorer('/docs', {
   includeExtensions: ['.md', '.mdx', '.txt'],
-  excludePatterns: ['draft-*', 'temp/**'],
+  excludePatterns: ['draft-*', 'temp/**', 'private/'],
   maxDepth: 5,
   sortBy: 'date',
   sortOrder: 'desc',
-  parseMarkdownMetadata: true
+  includeDotFiles: false,
+  parseMarkdownMetadata: true,
 });
 ```
 
-## Integration Examples
+## 🔗 Integration Examples
 
-### With Express API
+### Express API Server
 
 ```typescript
 import express from 'express';
@@ -152,66 +232,71 @@ import { MdFileExplorer } from '@asafarim/md-file-explorer';
 const app = express();
 const explorer = new MdFileExplorer('./docs');
 
-// Get file tree
+// Serve the file tree
 app.get('/api/docs/tree', async (req, res) => {
   const { path, depth } = req.query;
   const tree = await explorer.getFileTree(path as string, Number(depth) || 1);
   res.json(tree);
 });
 
-// Get file content
+// Serve file content
 app.get('/api/docs/file', async (req, res) => {
   const { path } = req.query;
   try {
     const content = await explorer.getFileContent(path as string);
     res.json(content);
-  } catch (error) {
+  } catch {
     res.status(404).json({ error: 'File not found' });
   }
 });
+
+// Search files
+app.get('/api/docs/search', async (req, res) => {
+  const { q, content } = req.query;
+  const results = await explorer.searchFiles(q as string, content === 'true');
+  res.json(results);
+});
+
+app.listen(3000);
 ```
 
-### With React Component
+### React Component
 
-```typescript
+```tsx
 import React, { useState, useEffect } from 'react';
 import { MdFileExplorer, FileNode } from '@asafarim/md-file-explorer';
 
-const DocumentationExplorer: React.FC = () => {
+function DocumentationExplorer() {
   const [explorer] = useState(() => new MdFileExplorer('./docs'));
   const [fileTree, setFileTree] = useState<FileNode[]>([]);
-  
+
   useEffect(() => {
     const loadTree = async () => {
       const tree = await explorer.getFileTree();
       setFileTree(tree);
     };
-    
+
     loadTree();
-    
-    // Watch for changes
-    explorer.watchDirectory((event, path) => {
-      // Refresh tree on changes
-      loadTree();
-    });
-    
+
+    // Auto-refresh on file changes
+    explorer.watchDirectory(() => loadTree());
+
     return () => explorer.stopWatching();
   }, [explorer]);
-  
+
   return (
-    <div>
-      {/* Render file tree */}
+    <ul>
       {fileTree.map(node => (
-        <FileTreeNode key={node.path} node={node} explorer={explorer} />
+        <li key={node.path}>{node.name}</li>
       ))}
-    </div>
+    </ul>
   );
-};
+}
 ```
 
-## File System Structure
+## 📂 Recommended Project Structure
 
-The package works best with organized documentation structures:
+The package works best with organized documentation:
 
 ```
 docs/
@@ -228,20 +313,56 @@ docs/
     └── basic-usage.md
 ```
 
-## Performance Considerations
+## ⚡ Performance Tips
 
-- Use lazy loading (`getFileTree()` with depth limit) for large directory structures
-- Enable file watching only when needed (development/preview modes)
-- Consider implementing content caching for frequently accessed files
-- Use exclude patterns to skip unnecessary directories (node_modules, .git, etc.)
+- **Use depth limits** — Pass a `depth` argument to `getFileTree()` to avoid scanning huge trees
+- **Exclude wisely** — Always exclude `node_modules`, `.git`, and build output directories
+- **Watch sparingly** — Only enable file watching in development or preview environments
+- **Cache content** — Cache results of `getFileContent()` for frequently accessed files
+- **Sort strategically** — Sorting by `date` is useful for blogs; `name` is best for docs
 
-## Contributing
+## 🛠️ Development
 
-1. Clone the repository
-2. Install dependencies: `pnpm install`
-3. Build the package: `pnpm build`
-4. Run tests: `pnpm test`
+```bash
+# Install dependencies
+pnpm install
 
-## License
+# Build the library
+pnpm build
 
-MIT License - see LICENSE file for details.
+# Run the demo locally
+pnpm dev
+
+# Run tests
+pnpm test
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how to get started:
+
+1. **Fork** the repository
+2. **Clone** your fork: `git clone https://github.com/AliSafari-IT/md-file-explorer.git`
+3. **Install** dependencies: `pnpm install`
+4. **Build** the package: `pnpm build`
+5. **Make** your changes and test with the demo: `pnpm dev`
+6. **Submit** a pull request
+
+## 📄 License
+
+MIT License — see [LICENSE](https://github.com/AliSafari-IT/md-file-explorer/blob/main/LICENSE) for details.
+
+## 🔗 Links
+
+- **npm**: [npmjs.com/package/@asafarim/md-file-explorer](https://www.npmjs.com/package/@asafarim/md-file-explorer)
+- **GitHub**: [github.com/AliSafari-IT/md-file-explorer](https://github.com/AliSafari-IT/md-file-explorer)
+- **Live Demo**: [alisafari-it.github.io/md-file-explorer](https://alisafari-it.github.io/md-file-explorer)
+- **Issues**: [github.com/AliSafari-IT/md-file-explorer/issues](https://github.com/AliSafari-IT/md-file-explorer/issues)
+
+---
+
+<div align="center">
+
+Made with ❤️ by [Ali Safari](https://github.com/AliSafari-IT)
+
+</div>

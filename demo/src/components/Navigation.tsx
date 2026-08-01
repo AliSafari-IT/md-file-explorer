@@ -10,6 +10,12 @@ interface NavigationProps {
 
 const demoItems = [
   {
+    id: 'getting-started' as DemoType,
+    title: 'Get Started',
+    description: 'Every scenario, in one place',
+    icon: '📖'
+  },
+  {
     id: 'basic' as DemoType,
     title: 'Basic Explorer',
     description: 'Simple file tree exploration',

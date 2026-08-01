@@ -1,0 +1,485 @@
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 40px;
+  padding: 8px 0 0;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(102, 126, 234, 0.1);
+  color: #5a4fd8;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+
+.heroTitle {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 16px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroDescription {
+  font-size: 1.125rem;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 24px 0;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #f8f9fa;
+  border: 2px solid #eef0f4;
+  color: #495057;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* ---------- Layout: sidebar TOC + content ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  /* items stretch (default) so .toc spans the full row height, giving its
+     sticky child room to stay pinned instead of scrolling away with a
+     short parent */
+}
+
+.toc {
+  min-width: 0;
+}
+
+.tocSticky {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.tocHeading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #adb5bd;
+}
+
+.tocGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tocGroupLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #667eea;
+}
+
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tocLink {
+  display: block;
+  padding: 4px 0 4px 10px;
+  border-left: 2px solid #eef0f4;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: all 0.15s ease;
+}
+
+.tocLink:hover {
+  color: #333;
+  border-left-color: #667eea;
+}
+
+.content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.mobileToc {
+  display: none;
+}
+
+/* ---------- Section card ---------- */
+
+.section {
+  background: white;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0f0f0;
+  scroll-margin-top: 20px;
+}
+
+.kicker {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.kicker_setup {
+  background: rgba(40, 167, 69, 0.12);
+  color: #1e7e34;
+}
+
+.kicker_config {
+  background: rgba(23, 162, 184, 0.12);
+  color: #117a8b;
+}
+
+.kicker_scenario {
+  background: rgba(102, 126, 234, 0.12);
+  color: #5a4fd8;
+}
+
+.kicker_integration {
+  background: rgba(253, 126, 20, 0.12);
+  color: #c85f0c;
+}
+
+.kicker_reference {
+  background: rgba(108, 117, 125, 0.12);
+  color: #495057;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 8px 0;
+}
+
+.sectionDescription {
+  color: #666;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0 0 18px 0;
+}
+
+.sectionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ctaButton {
+  margin-top: 18px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* ---------- Install tabs ---------- */
+
+.tabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: #f1f3f5;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.tab {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tab:hover {
+  color: #333;
+}
+
+.tabActive {
+  background: white;
+  color: #5a4fd8;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Reference tables ---------- */
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 2px solid #eef0f4;
+  border-radius: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: #f8f9fa;
+  color: #495057;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  border-bottom: 2px solid #eef0f4;
+}
+
+.table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f1f3f5;
+  color: #495057;
+  vertical-align: top;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table code {
+  background: #f1f3f4;
+  color: #5a4fd8;
+  font-size: 0.8125rem;
+}
+
+.tableType {
+  color: #6c757d;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.tableDefault {
+  color: #adb5bd;
+  white-space: nowrap;
+}
+
+/* ---------- Utility cards ---------- */
+
+.utilityGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.utilityCard {
+  background: #f8f9fa;
+  border: 2px solid #eef0f4;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.utilityName {
+  display: block;
+  background: transparent;
+  padding: 0;
+  color: #5a4fd8;
+  font-size: 0.8125rem;
+  word-break: break-word;
+}
+
+.utilityDescription {
+  margin: 8px 0 0 0;
+  color: #666;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* ---------- Performance tips ---------- */
+
+.tipsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.tipCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 2px solid #eef0f4;
+}
+
+.tipIcon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tipCard h4 {
+  margin: 0 0 4px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.tipCard p {
+  margin: 0;
+  color: #666;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .toc {
+    display: none;
+  }
+
+  .mobileToc {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobileTocChip {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #f1f3f5;
+    color: #495057;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .mobileTocChip:hover {
+    background: #e9ecef;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    margin-bottom: 28px;
+  }
+
+  .heroTitle {
+    font-size: 1.5rem;
+  }
+
+  .heroEyebrow {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+  }
+
+  .badges {
+    gap: 8px;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+
+  .section {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .sectionDescription {
+    font-size: 0.875rem;
+  }
+
+  .utilityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tipsGrid {
+    grid-template-columns: 1fr;
+  }
+}

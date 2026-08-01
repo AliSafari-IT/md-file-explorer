@@ -49,6 +49,20 @@
   display: none;
 }
 
+.mobileTopBarLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.mobileTopBarLogo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 7px;
+}
+
 .mobileTopBarTitle {
   color: white;
   font-weight: 700;
