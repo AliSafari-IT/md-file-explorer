@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
   id-token: write
 
 concurrency:
@@ -86,11 +87,31 @@ jobs:
       - name: Push version bump + tags
         run: git push --follow-tags
 
-      - name: Build demo for GitHub Pages
+      - name: Build demo (with updated version)
         run: cd demo && rm -rf dist && pnpm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: demo/dist
 
       - name: Summary
         run: |
           echo "### Released v${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Published to npm: https://www.npmjs.com/package/@asafarim/md-file-explorer" >> $GITHUB_STEP_SUMMARY
+          echo "Deployed demo: https://alisafari-it.github.io/md-file-explorer" >> $GITHUB_STEP_SUMMARY
+
+  deploy:
+    needs: release
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
