@@ -29,14 +29,19 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      - name: Clean stale build artifacts
+        run: |
+          rm -rf dist demo/dist demo/node_modules/.vite
+          find . -name "*.tsbuildinfo" -delete 2>/dev/null || true
+
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build library
-        run: pnpm run build
+      - name: Build library (fresh)
+        run: pnpm run clean && pnpm run build
 
-      - name: Build demo
-        run: cd demo && pnpm run build
+      - name: Build demo (fresh)
+        run: cd demo && rm -rf dist && pnpm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
