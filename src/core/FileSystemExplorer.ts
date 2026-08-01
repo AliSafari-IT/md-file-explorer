@@ -1,6 +1,6 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { FileNode, ExplorerOptions, ScanResult, FileContent } from '../types';
+import { FileNode, ExplorerOptions, ScanResult, FileContent, SearchResult } from '../types';
 import { 
   normalizePath, 
   shouldExcludePath, 
@@ -194,41 +194,92 @@ export class FileSystemExplorer {
 
   /**
    * Search for files matching a pattern
+   * When searchInContent is true, reads each file and searches its content,
+   * returning a snippet around the first match.
    */
   async searchFiles(query: string, searchInContent: boolean = false): Promise<FileNode[]> {
-    const result = await this.scanDirectory();
-    const matchingNodes: FileNode[] = [];
+    const results = await this.searchFilesDetailed(query, searchInContent);
+    return results.map(r => r.node);
+  }
 
-    const searchInNodes = (nodes: FileNode[]) => {
+  /**
+   * Search for files matching a pattern, returning detailed results with snippets
+   */
+  async searchFilesDetailed(query: string, searchInContent: boolean = false): Promise<SearchResult[]> {
+    const scanResult = await this.scanDirectory();
+    const lowerQuery = query.toLowerCase();
+    const results: SearchResult[] = [];
+    const seen = new Set<string>();
+
+    const collectFileNodes = (nodes: FileNode[]): FileNode[] => {
+      const files: FileNode[] = [];
       for (const node of nodes) {
-        // Search in file name
-        if (node.name.toLowerCase().includes(query.toLowerCase())) {
-          matchingNodes.push(node);
+        if (node.type === 'file') {
+          files.push(node);
         }
-        
-        // Search in metadata
-        if (node.metadata) {
-          const metadataStr = JSON.stringify(node.metadata).toLowerCase();
-          if (metadataStr.includes(query.toLowerCase())) {
-            matchingNodes.push(node);
-          }
-        }
-
-        // Recursively search in children
         if (node.children) {
-          searchInNodes(node.children);
+          files.push(...collectFileNodes(node.children));
         }
       }
+      return files;
     };
 
-    searchInNodes(result.nodes);
+    const allFiles = collectFileNodes(scanResult.nodes);
 
-    // TODO: Implement content search if searchInContent is true
-    if (searchInContent) {
-      // This would require reading all files and searching their content
-      // Can be implemented as needed
+    for (const node of allFiles) {
+      // Search in file name
+      if (node.name.toLowerCase().includes(lowerQuery)) {
+        if (!seen.has(node.path)) {
+          seen.add(node.path);
+          results.push({ node, matchType: 'name' });
+        }
+        continue;
+      }
+
+      // Search in metadata
+      if (node.metadata) {
+        const metadataStr = JSON.stringify(node.metadata).toLowerCase();
+        if (metadataStr.includes(lowerQuery)) {
+          if (!seen.has(node.path)) {
+            seen.add(node.path);
+            results.push({ node, matchType: 'metadata' });
+          }
+          continue;
+        }
+      }
+
+      // Search in file content
+      if (searchInContent) {
+        try {
+          const fullPath = path.resolve(this._rootPath, node.path);
+          const rawContent = await fs.readFile(fullPath, 'utf-8');
+          const lowerContent = rawContent.toLowerCase();
+          const matchIndex = lowerContent.indexOf(lowerQuery);
+
+          if (matchIndex !== -1) {
+            // Extract a snippet around the match (80 chars before and after)
+            const snippetStart = Math.max(0, matchIndex - 80);
+            const snippetEnd = Math.min(rawContent.length, matchIndex + query.length + 80);
+            let snippet = rawContent.substring(snippetStart, snippetEnd).trim();
+
+            // Clean up newlines for display
+            snippet = snippet.replace(/\n+/g, ' ');
+
+            // Add ellipsis if truncated
+            if (snippetStart > 0) snippet = '...' + snippet;
+            if (snippetEnd < rawContent.length) snippet = snippet + '...';
+
+            if (!seen.has(node.path)) {
+              seen.add(node.path);
+              results.push({ node, matchType: 'content', snippet });
+            }
+          }
+        } catch {
+          // Skip files that can't be read
+        }
+      }
     }
 
-    return matchingNodes;
+    return results;
   }
 }

@@ -6,10 +6,11 @@ import BasicExplorerDemo from './components/demos/BasicExplorerDemo'
 import LazyLoadingDemo from './components/demos/LazyLoadingDemo'
 import FileWatcherDemo from './components/demos/FileWatcherDemo'
 import AdvancedFeaturesDemo from './components/demos/AdvancedFeaturesDemo'
+import SearchDemo from './components/demos/SearchDemo'
 import PerformanceDemo from './components/demos/PerformanceDemo'
 import styles from './App.module.css'
 
-export type DemoType = 'getting-started' | 'basic' | 'lazy' | 'watcher' | 'advanced' | 'performance'
+export type DemoType = 'getting-started' | 'basic' | 'lazy' | 'watcher' | 'advanced' | 'search' | 'performance'
 
 function App() {
   const [activeDemo, setActiveDemo] = useState<DemoType>('getting-started')
@@ -37,6 +38,8 @@ function App() {
         return <FileWatcherDemo />
       case 'advanced':
         return <AdvancedFeaturesDemo />
+      case 'search':
+        return <SearchDemo />
       case 'performance':
         return <PerformanceDemo />
       default:

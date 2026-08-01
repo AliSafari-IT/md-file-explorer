@@ -2,8 +2,8 @@
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 14px;
   line-height: 1.4;
-  background: #fafafa;
-  border: 2px solid #e9ecef;
+  background: var(--md-surface-alt);
+  border: 2px solid var(--md-border);
   border-radius: 8px;
   padding: 16px;
   max-height: 500px;

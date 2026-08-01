@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #fafafa;
+  background: var(--md-bg);
 }
 
 .body {
@@ -36,11 +36,11 @@
 .main {
   flex: 1;
   overflow: auto;
-  background: white;
+  background: var(--md-surface);
   border-radius: 12px 0 0 0;
   margin-left: 16px;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--md-shadow);
 }
 
 /* Sticky mobile top bar - hidden on desktop, holds the hamburger toggle

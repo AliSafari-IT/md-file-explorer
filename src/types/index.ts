@@ -46,6 +46,12 @@ export interface FileWatcherCallback {
   (event: 'add' | 'change' | 'unlink' | 'addDir' | 'unlinkDir', path: string): void;
 }
 
+export interface SearchResult {
+  node: FileNode;
+  matchType: 'name' | 'metadata' | 'content';
+  snippet?: string;
+}
+
 export interface ExplorerAPI {
   scanDirectory(path?: string, options?: Partial<ExplorerOptions>): Promise<ScanResult>;
   getFileContent(filePath: string): Promise<FileContent>;

@@ -40,6 +40,12 @@ const demoItems = [
     icon: '🔧'
   },
   {
+    id: 'search' as DemoType,
+    title: 'Full-Text Search',
+    description: 'Search names, metadata & content',
+    icon: '🔎'
+  },
+  {
     id: 'performance' as DemoType,
     title: 'Performance',
     description: 'Benchmarks and optimization',

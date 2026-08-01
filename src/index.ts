@@ -10,6 +10,7 @@ export type {
   FileContent,
   ExplorerOptions,
   ScanResult,
+  SearchResult,
   FileWatcherCallback,
   ExplorerAPI
 } from './types';

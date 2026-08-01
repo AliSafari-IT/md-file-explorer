@@ -6,7 +6,8 @@ import {
   FileContent, 
   ScanResult, 
   FileWatcherCallback,
-  ExplorerAPI
+  ExplorerAPI,
+  SearchResult
 } from '../types';
 
 /**
@@ -99,6 +100,13 @@ export class MdFileExplorer implements ExplorerAPI {
    */
   async searchFiles(query: string, searchInContent: boolean = false): Promise<FileNode[]> {
     return this.explorer.searchFiles(query, searchInContent);
+  }
+
+  /**
+   * Search for files with detailed results (includes match type and content snippet)
+   */
+  async searchFilesDetailed(query: string, searchInContent: boolean = false): Promise<SearchResult[]> {
+    return this.explorer.searchFilesDetailed(query, searchInContent);
   }
 
   /**

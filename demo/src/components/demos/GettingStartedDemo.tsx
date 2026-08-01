@@ -184,13 +184,19 @@ const watchingCode = `explorer.watchDirectory((event, path) => {
 // Stop watching when the component unmounts
 explorer.stopWatching()`
 
-const searchingCode = `// Search by filename only
+const searchingCode = `// Search by filename only — fast
 const byName = await explorer.searchFiles('react')
 
-// Search inside file contents too (slower, but thorough)
+// Search inside file contents too — thorough
 const byContent = await explorer.searchFiles('useState', true)
 
-byContent.forEach(file => console.log(file.path))`
+// Get detailed results with match type and snippets
+const detailed = await explorer.searchFilesDetailed('hooks', true)
+detailed.forEach(result => {
+  console.log(result.matchType)  // 'name' | 'metadata' | 'content'
+  console.log(result.node.path)  // file path
+  console.log(result.snippet)    // excerpt around the match
+})`
 
 const filteringSortingCode = `const explorer = new MdFileExplorer('/docs', {
   includeExtensions: ['.md', '.mdx', '.txt'],
@@ -531,8 +537,8 @@ const GettingStartedDemo: React.FC<GettingStartedDemoProps> = ({ onNavigate }) =
             kicker="Scenario"
             kickerTone="scenario"
             title="Searching Files"
-            description="Find files by name, or search inside their content for a phrase."
-            cta={{ label: 'Try it in Advanced Features', demo: 'advanced' }}
+            description="Find files by name, or search inside their content for a phrase. The new searchFilesDetailed() method returns match type and content snippets."
+            cta={{ label: 'Try it in the Full-Text Search demo', demo: 'search' }}
             onNavigate={onNavigate}
           >
             <CodeExample code={searchingCode} language="typescript" />

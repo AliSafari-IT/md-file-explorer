@@ -1,3 +1,41 @@
+:root {
+  color-scheme: light dark;
+
+  --md-bg: #fafafa;
+  --md-surface: #ffffff;
+  --md-surface-alt: #f8f9fa;
+  --md-surface-alt-2: #f1f3f4;
+  --md-border: #e9ecef;
+  --md-border-strong: #dee2e6;
+  --md-border-soft: #f0f0f0;
+  --md-text: #333333;
+  --md-text-secondary: #495057;
+  --md-text-muted: #6c757d;
+  --md-text-faint: #868e96;
+  --md-text-faint-2: #adb5bd;
+  --md-shadow: rgba(0, 0, 0, 0.1);
+  --md-shadow-strong: rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --md-bg: #0b0e14;
+    --md-surface: #141821;
+    --md-surface-alt: #1a1f2b;
+    --md-surface-alt-2: #232939;
+    --md-border: #262c3b;
+    --md-border-strong: #2f3648;
+    --md-border-soft: #1f2430;
+    --md-text: #e8eaf0;
+    --md-text-secondary: #b7bccb;
+    --md-text-muted: #8b93a7;
+    --md-text-faint: #717a8f;
+    --md-text-faint-2: #5b6472;
+    --md-shadow: rgba(0, 0, 0, 0.35);
+    --md-shadow-strong: rgba(0, 0, 0, 0.5);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,8 +50,8 @@ html {
 html, body {
   height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: #fafafa;
-  color: #333;
+  background: var(--md-bg);
+  color: var(--md-text);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -26,8 +64,8 @@ html, body {
 
 /* Code highlighting */
 pre {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
+  background: var(--md-surface-alt);
+  border: 1px solid var(--md-border);
   border-radius: 8px;
   padding: 16px;
   overflow-x: auto;
@@ -37,7 +75,8 @@ pre {
 }
 
 code {
-  background: #f1f3f4;
+  background: var(--md-surface-alt-2);
+  color: var(--md-text);
   padding: 2px 6px;
   border-radius: 4px;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -56,17 +95,17 @@ pre code {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--md-surface-alt);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: var(--md-border-strong);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: var(--md-text-faint);
 }
 
 /* Button animations */

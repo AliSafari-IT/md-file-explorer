@@ -50,6 +50,12 @@ export interface FileWatcherCallback {
   (event: 'add' | 'change' | 'unlink' | 'addDir' | 'unlinkDir', path: string): void;
 }
 
+export interface SearchResult {
+  node: FileNode;
+  matchType: 'name' | 'metadata' | 'content';
+  snippet?: string;
+}
+
 export interface ExplorerAPI {
   scanDirectory(path?: string, options?: Partial<ExplorerOptions>): Promise<ScanResult>;
   getFileContent(filePath: string): Promise<FileContent>;
@@ -415,15 +421,71 @@ export class FileSystemExplorer {
     return null;
   }
 
-  async searchFiles(query: string, _searchInContent: boolean = false): Promise<FileNode[]> {
-    const results: FileNode[] = [];
-    const search = (nodes: FileNode[]) => {
+  async searchFiles(query: string, searchInContent: boolean = false): Promise<FileNode[]> {
+    const detailed = await this.searchFilesDetailed(query, searchInContent);
+    return detailed.map(r => r.node);
+  }
+
+  async searchFilesDetailed(query: string, searchInContent: boolean = false): Promise<SearchResult[]> {
+    const lowerQuery = query.toLowerCase();
+    const results: SearchResult[] = [];
+    const seen = new Set<string>();
+
+    const collectFiles = (nodes: FileNode[]): FileNode[] => {
+      const files: FileNode[] = [];
       for (const node of nodes) {
-        if (node.name.toLowerCase().includes(query.toLowerCase())) results.push(node);
-        if (node.children) search(node.children);
+        if (node.type === 'file') files.push(node);
+        if (node.children) files.push(...collectFiles(node.children));
       }
+      return files;
     };
-    search(mockFileTree);
+
+    const allFiles = collectFiles(mockFileTree);
+
+    for (const node of allFiles) {
+      // Search in file name
+      if (node.name.toLowerCase().includes(lowerQuery)) {
+        if (!seen.has(node.path)) {
+          seen.add(node.path);
+          results.push({ node, matchType: 'name' });
+        }
+        continue;
+      }
+
+      // Search in metadata
+      if (node.metadata) {
+        const metaStr = JSON.stringify(node.metadata).toLowerCase();
+        if (metaStr.includes(lowerQuery)) {
+          if (!seen.has(node.path)) {
+            seen.add(node.path);
+            results.push({ node, matchType: 'metadata' });
+          }
+          continue;
+        }
+      }
+
+      // Search in file content
+      if (searchInContent) {
+        const mockContent = mockFileContents[node.path];
+        if (mockContent) {
+          const lowerContent = mockContent.content.toLowerCase();
+          const matchIndex = lowerContent.indexOf(lowerQuery);
+          if (matchIndex !== -1) {
+            const snippetStart = Math.max(0, matchIndex - 80);
+            const snippetEnd = Math.min(mockContent.content.length, matchIndex + query.length + 80);
+            let snippet = mockContent.content.substring(snippetStart, snippetEnd).trim();
+            snippet = snippet.replace(/\n+/g, ' ');
+            if (snippetStart > 0) snippet = '...' + snippet;
+            if (snippetEnd < mockContent.content.length) snippet = snippet + '...';
+            if (!seen.has(node.path)) {
+              seen.add(node.path);
+              results.push({ node, matchType: 'content', snippet });
+            }
+          }
+        }
+      }
+    }
+
     return results;
   }
 }
@@ -509,6 +571,10 @@ export class MdFileExplorer implements ExplorerAPI {
 
   async searchFiles(query: string, searchInContent: boolean = false): Promise<FileNode[]> {
     return this.explorer.searchFiles(query, searchInContent);
+  }
+
+  async searchFilesDetailed(query: string, searchInContent: boolean = false): Promise<SearchResult[]> {
+    return this.explorer.searchFilesDetailed(query, searchInContent);
   }
 
   get options(): ExplorerOptions { return this.explorer.options; }
