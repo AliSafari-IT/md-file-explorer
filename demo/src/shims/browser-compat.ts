@@ -334,7 +334,7 @@ export async function parseMarkdownMetadata(_filePath: string): Promise<Markdown
 
 export async function createFileNode(
   _filePath: string,
-  relativePath: string,
+  _relativePath: string,
   _parseMetadata: boolean = false
 ): Promise<FileNode | null> {
   return null;
@@ -430,11 +430,7 @@ export class FileSystemExplorer {
 
 export class FileWatcher {
   private intervalId: ReturnType<typeof setInterval> | null = null;
-  private explorer: FileSystemExplorer;
-
-  constructor(rootPath: string, options: Partial<ExplorerOptions> = {}) {
-    this.explorer = new FileSystemExplorer(rootPath, options);
-  }
+  constructor(_rootPath: string, _options: Partial<ExplorerOptions> = {}) {}
 
   watch(callback: FileWatcherCallback): void {
     if (this.intervalId) this.stopWatching();
