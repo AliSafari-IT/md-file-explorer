@@ -1,5 +1,4 @@
 import React from 'react'
-import { version } from '../../../package.json'
 import styles from './Header.module.css'
 
 const GitHubIcon: React.FC = () => (
@@ -26,7 +25,7 @@ const Header: React.FC = () => {
           <div className={styles.brandText}>
             <div className={styles.titleRow}>
               <h1>@asafarim/md-file-explorer</h1>
-              <span className={styles.version}>v{version}</span>
+              <span className={styles.version}>v{__APP_VERSION__}</span>
             </div>
             <p className={styles.description}>
               Professional markdown file exploration with TypeScript, lazy loading, and real-time file watching
