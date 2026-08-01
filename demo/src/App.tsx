@@ -48,7 +48,7 @@ function App() {
     <div className={styles.app}>
       <div className={styles.mobileTopBar}>
         <div className={styles.mobileTopBarLeft}>
-          <img src="/logo.svg" alt="" className={styles.mobileTopBarLogo} />
+          <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="" className={styles.mobileTopBarLogo} />
           <span className={styles.mobileTopBarTitle}>MD File Explorer</span>
         </div>
         <button

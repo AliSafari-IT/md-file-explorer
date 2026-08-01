@@ -19,7 +19,10 @@ const Header: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.brand}>
-          <img src="/logo.svg" alt="" className={styles.logo} />
+          <img
+            src={`${import.meta.env.BASE_URL}logo.svg`}
+            alt="Professional markdown file exploration with TypeScript, lazy loading, and real-time file watching"
+            className={styles.logo} />
           <div className={styles.brandText}>
             <div className={styles.titleRow}>
               <h1>@asafarim/md-file-explorer</h1>
