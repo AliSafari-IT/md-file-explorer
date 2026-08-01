@@ -4,7 +4,7 @@
 
 # @asafarim/md-file-explorer
 
-**A TypeScript library for recursively exploring markdown files and folders with lazy loading, file watching, and metadata parsing.**
+**A TypeScript library for recursively exploring markdown files and folders with lazy loading, file watching, full-text search, and metadata parsing.**
 
 [![npm version](https://img.shields.io/npm/v/@asafarim/md-file-explorer.svg)](https://www.npmjs.com/package/@asafarim/md-file-explorer)
 [![npm downloads](https://img.shields.io/npm/dm/@asafarim/md-file-explorer.svg)](https://www.npmjs.com/package/@asafarim/md-file-explorer)
@@ -90,6 +90,7 @@ new MdFileExplorer(rootPath: string, options?: ExplorerOptions)
 | `watchDirectory(callback)`          | `void`                   | Watch for file system changes in real-time   |
 | `stopWatching()`                    | `void`                   | Stop watching for file changes               |
 | `searchFiles(query, searchInContent?)` | `Promise<FileNode[]>` | Search for files by name or content          |
+| `searchFilesDetailed(query, searchInContent?)` | `Promise<SearchResult[]>` | Search and return match type + snippet   |
 | `fileExists(filePath)`              | `Promise<boolean>`       | Check if a file exists in the tree           |
 
 ### Types
@@ -146,6 +147,16 @@ interface ScanResult {
 }
 ```
 
+#### `SearchResult`
+
+```typescript
+interface SearchResult {
+  node: FileNode;                              // The matched file node
+  matchType: 'name' | 'metadata' | 'content';  // Where the match was found
+  snippet?: string;                            // Excerpt around the match (content matches only)
+}
+```
+
 ### Utilities
 
 The package also exports these helper functions:
@@ -195,14 +206,22 @@ explorer.stopWatching();
 
 ### Searching Files
 
-Find files by name or search their content:
+Find files by name, metadata, or search inside their content:
 
 ```typescript
-// Search by filename
+// Search by filename only — fast
 const byName = await explorer.searchFiles('react');
 
-// Search inside file contents too
+// Search inside file contents too — thorough
 const byContent = await explorer.searchFiles('useState', true);
+
+// Get detailed results with match type and snippets
+const detailed = await explorer.searchFilesDetailed('hooks', true);
+detailed.forEach(result => {
+  console.log(result.matchType);  // 'name' | 'metadata' | 'content'
+  console.log(result.node.path);  // file path
+  console.log(result.snippet);    // excerpt around the match (content matches)
+});
 ```
 
 ### Custom Configuration
@@ -250,10 +269,10 @@ app.get('/api/docs/file', async (req, res) => {
   }
 });
 
-// Search files
+// Search files (returns detailed results with match type and snippets)
 app.get('/api/docs/search', async (req, res) => {
   const { q, content } = req.query;
-  const results = await explorer.searchFiles(q as string, content === 'true');
+  const results = await explorer.searchFilesDetailed(q as string, content === 'true');
   res.json(results);
 });
 
@@ -320,6 +339,7 @@ docs/
 - **Watch sparingly** — Only enable file watching in development or preview environments
 - **Cache content** — Cache results of `getFileContent()` for frequently accessed files
 - **Sort strategically** — Sorting by `date` is useful for blogs; `name` is best for docs
+- **Content search is slower** — `searchFiles(query, true)` reads every file; use it only when filename search isn't enough
 
 ## 🛠️ Development
 
@@ -330,12 +350,17 @@ pnpm install
 # Build the library
 pnpm build
 
-# Run the demo locally
+# Run the demo locally (builds library first, then starts Vite dev server on port 3106)
 pnpm dev
 
 # Run tests
 pnpm test
+
+# Publish to npm (bumps version first, then publishes and pushes tags)
+npm version minor && pnpm publish
 ```
+
+The demo app includes a **dark mode** that automatically follows your system's `prefers-color-scheme` setting, with all colors driven by CSS custom properties for seamless light/dark switching.
 
 ## 🤝 Contributing
 
