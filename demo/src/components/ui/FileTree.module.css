@@ -26,21 +26,21 @@
 }
 
 .header:hover {
-  background: #e9ecef;
+  background: var(--md-border);
 }
 
 .folder {
   font-weight: 600;
-  color: #495057;
+  color: var(--md-text-secondary);
 }
 
 .file {
-  color: #6c757d;
+  color: var(--md-text-muted);
 }
 
 .file:hover {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: var(--md-accent-blue-bg);
+  color: var(--md-accent-blue);
 }
 
 .icon {
@@ -60,26 +60,26 @@
   display: flex;
   gap: 12px;
   font-size: 12px;
-  color: #868e96;
+  color: var(--md-text-faint);
 }
 
 .size {
-  background: #f8f9fa;
+  background: var(--md-surface);
   padding: 2px 6px;
   border-radius: 3px;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--md-border-strong);
 }
 
 .date {
-  background: #f8f9fa;
+  background: var(--md-surface);
   padding: 2px 6px;
   border-radius: 3px;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--md-border-strong);
 }
 
 .toggle {
   font-size: 12px;
-  color: #adb5bd;
+  color: var(--md-text-faint-2);
   flex-shrink: 0;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .metadataDetails {
-  background: #f1f3f4;
+  background: var(--md-surface-alt-2);
   border-left: 3px solid #667eea;
   margin: 4px 0;
   padding: 8px 12px;
@@ -98,21 +98,21 @@
 
 .metadataItem {
   margin: 2px 0;
-  color: #495057;
+  color: var(--md-text-secondary);
 }
 
 .metadataItem strong {
-  color: #343a40;
+  color: var(--md-text);
   margin-right: 6px;
 }
 
 .empty {
   text-align: center;
-  color: #868e96;
+  color: var(--md-text-faint);
   font-style: italic;
   padding: 40px 20px;
-  background: #f8f9fa;
-  border: 2px dashed #dee2e6;
+  background: var(--md-surface);
+  border: 2px dashed var(--md-border-strong);
   border-radius: 8px;
 }
 
@@ -122,17 +122,17 @@
 }
 
 .tree::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--md-surface);
   border-radius: 4px;
 }
 
 .tree::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: var(--md-border-strong);
   border-radius: 4px;
 }
 
 .tree::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: var(--md-text-faint);
 }
 
 @media (max-width: 768px) {

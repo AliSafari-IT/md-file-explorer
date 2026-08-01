@@ -19,7 +19,7 @@
   padding: 6px 14px;
   border-radius: 999px;
   background: rgba(102, 126, 234, 0.1);
-  color: #5a4fd8;
+  color: var(--md-accent-purple);
   font-weight: 600;
   font-size: 0.8125rem;
   letter-spacing: 0.02em;
@@ -39,7 +39,7 @@
 
 .heroDescription {
   font-size: 1.125rem;
-  color: #555;
+  color: var(--md-text-secondary);
   line-height: 1.7;
   margin: 0 0 24px 0;
 }
@@ -57,9 +57,9 @@
   gap: 6px;
   padding: 8px 14px;
   border-radius: 999px;
-  background: #f8f9fa;
-  border: 2px solid #eef0f4;
-  color: #495057;
+  background: var(--md-surface-alt);
+  border: 2px solid var(--md-border);
+  color: var(--md-text-secondary);
   font-size: 0.8125rem;
   font-weight: 600;
 }
@@ -95,7 +95,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #adb5bd;
+  color: var(--md-text-faint-2);
 }
 
 .tocGroup {
@@ -123,8 +123,8 @@
 .tocLink {
   display: block;
   padding: 4px 0 4px 10px;
-  border-left: 2px solid #eef0f4;
-  color: #666;
+  border-left: 2px solid var(--md-border);
+  color: var(--md-text-secondary);
   text-decoration: none;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -132,7 +132,7 @@
 }
 
 .tocLink:hover {
-  color: #333;
+  color: var(--md-text);
   border-left-color: #667eea;
 }
 
@@ -150,11 +150,11 @@
 /* ---------- Section card ---------- */
 
 .section {
-  background: white;
+  background: var(--md-surface);
   padding: 28px;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f0f0f0;
+  box-shadow: 0 2px 8px var(--md-shadow);
+  border: 2px solid var(--md-border-soft);
   scroll-margin-top: 20px;
 }
 
@@ -171,38 +171,38 @@
 
 .kicker_setup {
   background: rgba(40, 167, 69, 0.12);
-  color: #1e7e34;
+  color: var(--md-accent-green);
 }
 
 .kicker_config {
   background: rgba(23, 162, 184, 0.12);
-  color: #117a8b;
+  color: var(--md-accent-teal);
 }
 
 .kicker_scenario {
   background: rgba(102, 126, 234, 0.12);
-  color: #5a4fd8;
+  color: var(--md-accent-purple);
 }
 
 .kicker_integration {
   background: rgba(253, 126, 20, 0.12);
-  color: #c85f0c;
+  color: var(--md-accent-orange);
 }
 
 .kicker_reference {
   background: rgba(108, 117, 125, 0.12);
-  color: #495057;
+  color: var(--md-text-secondary);
 }
 
 .sectionTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #222;
+  color: var(--md-text);
   margin: 0 0 8px 0;
 }
 
 .sectionDescription {
-  color: #666;
+  color: var(--md-text-secondary);
   font-size: 0.9375rem;
   line-height: 1.6;
   margin: 0 0 18px 0;
@@ -238,7 +238,7 @@
   display: inline-flex;
   gap: 4px;
   padding: 4px;
-  background: #f1f3f5;
+  background: var(--md-surface-alt-2);
   border-radius: 10px;
   width: fit-content;
 }
@@ -248,7 +248,7 @@
   border: none;
   border-radius: 7px;
   background: transparent;
-  color: #666;
+  color: var(--md-text-secondary);
   font-weight: 600;
   font-size: 0.8125rem;
   cursor: pointer;
@@ -256,20 +256,20 @@
 }
 
 .tab:hover {
-  color: #333;
+  color: var(--md-text);
 }
 
 .tabActive {
-  background: white;
-  color: #5a4fd8;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  background: var(--md-surface);
+  color: var(--md-accent-purple);
+  box-shadow: 0 1px 4px var(--md-shadow);
 }
 
 /* ---------- Reference tables ---------- */
 
 .tableWrapper {
   overflow-x: auto;
-  border: 2px solid #eef0f4;
+  border: 2px solid var(--md-border);
   border-radius: 10px;
 }
 
@@ -282,19 +282,19 @@
 .table th {
   text-align: left;
   padding: 10px 14px;
-  background: #f8f9fa;
-  color: #495057;
+  background: var(--md-surface-alt);
+  color: var(--md-text-secondary);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   white-space: nowrap;
-  border-bottom: 2px solid #eef0f4;
+  border-bottom: 2px solid var(--md-border);
 }
 
 .table td {
   padding: 10px 14px;
-  border-bottom: 1px solid #f1f3f5;
-  color: #495057;
+  border-bottom: 1px solid var(--md-surface-alt-2);
+  color: var(--md-text-secondary);
   vertical-align: top;
 }
 
@@ -303,20 +303,20 @@
 }
 
 .table code {
-  background: #f1f3f4;
-  color: #5a4fd8;
+  background: var(--md-surface-alt-2);
+  color: var(--md-accent-purple);
   font-size: 0.8125rem;
 }
 
 .tableType {
-  color: #6c757d;
+  color: var(--md-text-muted);
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.8125rem;
   white-space: nowrap;
 }
 
 .tableDefault {
-  color: #adb5bd;
+  color: var(--md-text-faint-2);
   white-space: nowrap;
 }
 
@@ -329,8 +329,8 @@
 }
 
 .utilityCard {
-  background: #f8f9fa;
-  border: 2px solid #eef0f4;
+  background: var(--md-surface-alt);
+  border: 2px solid var(--md-border);
   border-radius: 10px;
   padding: 14px 16px;
 }
@@ -339,14 +339,14 @@
   display: block;
   background: transparent;
   padding: 0;
-  color: #5a4fd8;
+  color: var(--md-accent-purple);
   font-size: 0.8125rem;
   word-break: break-word;
 }
 
 .utilityDescription {
   margin: 8px 0 0 0;
-  color: #666;
+  color: var(--md-text-secondary);
   font-size: 0.8125rem;
   line-height: 1.5;
 }
@@ -364,9 +364,9 @@
   align-items: flex-start;
   gap: 12px;
   padding: 16px;
-  background: #f8f9fa;
+  background: var(--md-surface-alt);
   border-radius: 10px;
-  border: 2px solid #eef0f4;
+  border: 2px solid var(--md-border);
 }
 
 .tipIcon {
@@ -377,13 +377,13 @@
 
 .tipCard h4 {
   margin: 0 0 4px 0;
-  color: #333;
+  color: var(--md-text);
   font-size: 1rem;
 }
 
 .tipCard p {
   margin: 0;
-  color: #666;
+  color: var(--md-text-secondary);
   font-size: 0.875rem;
   line-height: 1.4;
 }
@@ -412,8 +412,8 @@
     flex-shrink: 0;
     padding: 6px 14px;
     border-radius: 999px;
-    background: #f1f3f5;
-    color: #495057;
+    background: var(--md-surface-alt-2);
+    color: var(--md-text-secondary);
     text-decoration: none;
     font-size: 0.8125rem;
     font-weight: 600;
@@ -421,7 +421,7 @@
   }
 
   .mobileTocChip:hover {
-    background: #e9ecef;
+    background: var(--md-border);
   }
 }
 

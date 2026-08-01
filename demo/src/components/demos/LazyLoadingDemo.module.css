@@ -10,7 +10,7 @@
 .header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
+  color: var(--md-text);
   margin: 0 0 16px 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
@@ -20,7 +20,7 @@
 
 .header p {
   font-size: 1.125rem;
-  color: #666;
+  color: var(--md-text-secondary);
   line-height: 1.6;
   margin: 0;
 }
@@ -33,12 +33,12 @@
 
 .stat {
   flex: 1;
-  background: white;
+  background: var(--md-surface);
   padding: 20px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f0f0f0;
+  box-shadow: 0 2px 8px var(--md-shadow);
+  border: 2px solid var(--md-border-soft);
 }
 
 .statValue {
@@ -52,16 +52,16 @@
 .statLabel {
   display: block;
   font-size: 0.875rem;
-  color: #666;
+  color: var(--md-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .controls {
-  background: #f8f9fa;
+  background: var(--md-surface-alt);
   padding: 20px;
   border-radius: 12px;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--md-border);
   margin-bottom: 32px;
   display: flex;
   align-items: center;
@@ -92,7 +92,7 @@
 }
 
 .instruction {
-  color: #666;
+  color: var(--md-text-secondary);
   margin: 0;
   font-style: italic;
 }
@@ -104,28 +104,28 @@
 }
 
 .section {
-  background: white;
+  background: var(--md-surface);
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f0f0f0;
+  box-shadow: 0 2px 8px var(--md-shadow);
+  border: 2px solid var(--md-border-soft);
 }
 
 .section h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: var(--md-text);
   margin: 0 0 20px 0;
   padding-bottom: 12px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--md-border-soft);
 }
 
 .treeContainer {
   max-height: 400px;
   overflow-y: auto;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--md-border);
   border-radius: 8px;
-  background: #fafafa;
+  background: var(--md-surface-alt);
 }
 
 .lazyTree {
@@ -149,16 +149,16 @@
 }
 
 .treeItemHeader:hover {
-  background: #e9ecef;
+  background: var(--md-border);
 }
 
 .folder {
   font-weight: 600;
-  color: #495057;
+  color: var(--md-text-secondary);
 }
 
 .file {
-  color: #6c757d;
+  color: var(--md-text-muted);
 }
 
 .icon {
@@ -176,7 +176,7 @@
 
 .toggle {
   font-size: 12px;
-  color: #adb5bd;
+  color: var(--md-text-faint-2);
   flex-shrink: 0;
 }
 

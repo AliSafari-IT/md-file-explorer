@@ -10,7 +10,7 @@
 .header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
+  color: var(--md-text);
   margin: 0 0 16px 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
@@ -20,13 +20,13 @@
 
 .header p {
   font-size: 1.125rem;
-  color: #666;
+  color: var(--md-text-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 .header code {
-  background: #e9ecef;
+  background: var(--md-border);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.875em;
@@ -35,10 +35,10 @@
 
 /* Search bar */
 .searchBar {
-  background: #f8f9fa;
+  background: var(--md-surface-alt);
   padding: 24px;
   border-radius: 12px;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--md-border);
   margin-bottom: 16px;
 }
 
@@ -58,11 +58,11 @@
   flex: 1;
   padding: 12px 16px;
   font-size: 1rem;
-  border: 2px solid #dee2e6;
+  border: 2px solid var(--md-border-strong);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
-  background: white;
+  background: var(--md-surface);
 }
 
 .searchInput:focus {
@@ -98,7 +98,7 @@
   align-items: center;
   gap: 8px;
   font-size: 0.9375rem;
-  color: #495057;
+  color: var(--md-text-secondary);
   cursor: pointer;
   user-select: none;
 }
@@ -121,18 +121,18 @@
 
 .quickLabel {
   font-size: 0.875rem;
-  color: #6c757d;
+  color: var(--md-text-muted);
   font-weight: 500;
 }
 
 .quickChip {
   padding: 6px 14px;
   font-size: 0.875rem;
-  background: white;
-  border: 1.5px solid #dee2e6;
+  background: var(--md-surface);
+  border: 1.5px solid var(--md-border-strong);
   border-radius: 20px;
   cursor: pointer;
-  color: #495057;
+  color: var(--md-text-secondary);
   transition: all 0.2s;
 }
 
@@ -150,13 +150,13 @@
   flex-wrap: wrap;
   margin-bottom: 16px;
   padding: 12px 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--md-border);
 }
 
 .resultCount {
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--md-text);
 }
 
 .matchBreakdown {
@@ -168,7 +168,7 @@
 
 .searchTime {
   font-size: 0.8125rem;
-  color: #6c757d;
+  color: var(--md-text-muted);
   margin-left: auto;
   font-variant-numeric: tabular-nums;
 }
@@ -182,8 +182,8 @@
 }
 
 .resultCard {
-  background: white;
-  border: 1.5px solid #e9ecef;
+  background: var(--md-surface);
+  border: 1.5px solid var(--md-border);
   border-radius: 10px;
   padding: 16px 20px;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -191,7 +191,7 @@
 
 .resultCard:hover {
   border-color: #c4b5fd;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px var(--md-shadow);
 }
 
 .resultHeader {
@@ -215,27 +215,27 @@
 .resultPath {
   font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
   font-size: 0.875rem;
-  color: #495057;
+  color: var(--md-text-secondary);
 }
 
 .resultSize {
   font-size: 0.75rem;
-  color: #6c757d;
+  color: var(--md-text-muted);
   margin-left: auto;
 }
 
 .resultTitle {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #333;
+  color: var(--md-text);
   margin-bottom: 6px;
 }
 
 .snippet {
   font-size: 0.875rem;
-  color: #495057;
+  color: var(--md-text-secondary);
   line-height: 1.5;
-  background: #f8f9fa;
+  background: var(--md-surface-alt);
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid #10b981;
@@ -252,16 +252,16 @@
 .tag {
   font-size: 0.75rem;
   padding: 2px 8px;
-  background: #e9ecef;
+  background: var(--md-border);
   border-radius: 4px;
-  color: #495057;
+  color: var(--md-text-secondary);
 }
 
 /* No results */
 .noResults {
   text-align: center;
   padding: 48px 24px;
-  color: #6c757d;
+  color: var(--md-text-muted);
 }
 
 .noResultsIcon {
@@ -277,7 +277,7 @@
 
 .noResultsHint {
   font-size: 0.875rem !important;
-  color: #adb5bd;
+  color: var(--md-text-faint-2);
 }
 
 /* Code section */
@@ -288,7 +288,7 @@
 .codeSection h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #333;
+  color: var(--md-text);
   margin: 0 0 16px 0;
 }
 

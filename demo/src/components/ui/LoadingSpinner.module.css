@@ -48,7 +48,7 @@
 }
 
 .message {
-  color: #666;
+  color: var(--md-text-secondary);
   font-size: 0.875rem;
   margin: 0;
   font-weight: 500;
